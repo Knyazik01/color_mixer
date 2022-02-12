@@ -21,4 +21,9 @@ export {
 export {
   normalizeNumber,
   toColorSting,
+  getStringsFromCMYK,
 } from './formaters';
+
+export {
+  randomColorCMYK,
+} from './randomColor';

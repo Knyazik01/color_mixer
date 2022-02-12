@@ -1,23 +1,13 @@
-import styles from './ColorPicker.module.scss';
-import Button from '../Button';
 import { useEffect, useState } from 'react';
-import { CMYKtoHEX, round } from '../../helpers';
 import Slider from 'react-input-slider';
-import { getStringsFromCMYK } from '../../helpers/formaters';
-
+import Button from '../Button';
+import { CMYKtoHEX, getStringsFromCMYK, randomColorCMYK, round } from '../../helpers';
 import ColorInfo from '../ColorInfo';
 import { REGEX, TYPES } from '../../constants';
-
-
-const getRandom = () => round({
-  c: Math.random(),
-  m: Math.random(),
-  y: Math.random(),
-  k: 0,
-}, TYPES.CMYK);
+import styles from './ColorPicker.module.scss';
 
 const ColorPicker = ({ onSelect, initColor }) => {
-  const random = getRandom();
+  const random = randomColorCMYK();
   const initialColor = initColor ?? random;
   const [color, setColor] = useState(initialColor);
   useEffect(() => {

@@ -1,5 +1,8 @@
 @import './src/assets/styles/variables';
 @import './src/assets/styles/mixins';
 
-.content {
+.modal {
+  @include media(mobile) {
+    width: calc(100% - 32px);
+  }
 }

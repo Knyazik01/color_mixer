@@ -10,11 +10,21 @@
   border-radius: 16px;
   background-color: $periwinkle;
 
+  @include media(mobile) {
+    width: 100%;
+  }
+
   .previewBlock {
     display: flex;
     column-gap: 32px;
     align-items: center;
     height: 150px;
+
+    @include media(mobile) {
+      height: auto;
+      flex-direction: column;
+      row-gap: 10px;
+    }
 
     .previewColor {
       width: 150px;

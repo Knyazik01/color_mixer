@@ -1,7 +1,5 @@
 import { proxy } from 'valtio';
 
-const state = proxy({
-  },
-);
+const state = proxy({});
 
 export default state;
