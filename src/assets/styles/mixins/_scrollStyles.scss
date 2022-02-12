@@ -1,0 +1,42 @@
+@import '../variables';
+
+// default light styles
+@mixin coreScroll(
+  $theme: light,
+  $background: $silver,
+  //$background-shadow: $bright-grey,
+  $background-shadow: $white,
+  $thumb: $gray-suit,
+  $thumb-hover: $bright-grey,
+  $thumb-border-color: transparent,
+  $width: 10px,
+) {
+  &::-webkit-scrollbar {
+    width: $width;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    border-radius: 8px;
+    box-shadow: inset 0 0 5px $background-shadow;
+    background-color: $background;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: $thumb;
+    border: 1px solid $thumb-border-color;
+
+    /* Handle on hover */
+    &:hover {
+      background-color: $thumb-hover;
+    }
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $thumb;
+    scrollbar-track-color: $background;
+  }
+}

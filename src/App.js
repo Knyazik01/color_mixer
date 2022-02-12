@@ -1,25 +1,26 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import ColorPickerModal from './components/ColorPickerModal';
 import './App.css';
 
-function App() {
+const App = () => {
+  const onColorSelect = (color) => {
+    console.log(color);
+  };
+  const [isModalOpen, setIsModalOpen] = useState(true);
+  const toggleModal = (isOpen = !isModalOpen) => {
+    setIsModalOpen(isOpen);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      {
+        isModalOpen && <ColorPickerModal
+          onSelect={onColorSelect}
+          closeModal={() => toggleModal(false)}
+        />
+      }
     </div>
   );
-}
+};
 
 export default App;

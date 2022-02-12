@@ -1,0 +1,17 @@
+@mixin textRows($rows: 2) {
+  display: -webkit-box;
+  -webkit-line-clamp: $rows;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+@mixin textOverflowOneLine {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@mixin breakByWords {
+  overflow-wrap: anywhere;
+  word-break: normal;
+}

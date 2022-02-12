@@ -1,0 +1,21 @@
+@import './src/assets/styles/variables';
+@import './src/assets/styles/mixins';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+
+  .formatRow {
+    display: flex;
+    column-gap: 4px;
+
+    .title {
+      font-weight: 600;
+    }
+
+    .value {
+      //font-style: italic;
+    }
+  }
+}

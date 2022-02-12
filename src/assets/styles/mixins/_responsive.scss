@@ -1,0 +1,43 @@
+$container--mobile: 768px;
+$container--tablet: 1024px;
+$container--landscape: 1280px;
+$container--laptop: 1440px;
+
+// 0 - 767
+$mobile: 'only screen and (max-width: #{$container--mobile - 1})';
+// 768 - 1279
+$tablet: 'only screen and (min-width: #{$container--mobile}) and (max-width: #{$container--landscape - 1})';
+// 768 - 1023
+$portrait: 'only screen and (min-width: #{$container--mobile}) and (max-width: #{$container--tablet - 1})';
+// 1024 - 1279
+$landscape: 'only screen and (min-width: #{$container--tablet}) and (max-width: #{$container--landscape - 1})';
+// 1280 - 1439
+$small-laptop: 'only screen and (min-width: #{$container--landscape}) and (max-width: #{$container--laptop - 1})';
+// 0 - 1279
+$mobile-tablet: 'only screen and (max-width: #{$container--landscape - 1})';
+// 1280 - Inf
+$laptop: 'only screen and (min-width: #{$container--landscape})';
+
+@mixin media($type: mobile) {
+  $media: $mobile;
+
+  @if $type == mobile {
+    $media: $mobile;
+  } @else if $type == portrait {
+    $media: $portrait;
+  } @else if $type == tablet {
+    $media: $tablet;
+  } @else if $type == landscape {
+    $media: $landscape;
+  } @else if $type == small-laptop {
+    $media: $small-laptop;
+  } @else if $type == mobile-tablet {
+    $media: $mobile-tablet;
+  } @else if $type == laptop {
+    $media: $laptop;
+  }
+
+  @media #{$media} {
+    @content;
+  }
+}

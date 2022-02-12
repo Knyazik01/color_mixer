@@ -1,0 +1,19 @@
+@import './src/assets/styles/variables';
+@import './src/assets/styles/mixins';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $modalZ-Index;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $black-50;
+
+  .content {
+    position: relative;
+  }
+}
