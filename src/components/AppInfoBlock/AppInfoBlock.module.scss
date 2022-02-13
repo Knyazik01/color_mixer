@@ -1,0 +1,34 @@
+@import './src/assets/styles/variables';
+@import './src/assets/styles/mixins';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+
+  @include media(portrait) {
+    row-gap: 20px;
+  }
+
+  @include media(mobile) {
+    row-gap: 10px;
+  }
+
+  .title {
+    font-size: 40px;
+    font-weight: 600;
+
+    @include media(mobile) {
+      font-size: 32px;
+    }
+  }
+
+  .description {
+    font-size: 20px;
+    line-height: 28px;
+
+    @include media(mobile) {
+      font-size: 18px;
+    }
+  }
+}

@@ -6,24 +6,24 @@ const round = (color, type) => {
   switch ( type ) {
     case TYPES.RGB: {
       return {
-        r: Math.round(color.r),
-        g: Math.round(color.g),
-        b: Math.round(color.b),
+        r: +(color.r.toFixed(0)),
+        g: +(color.g.toFixed(0)),
+        b: +(color.b.toFixed(0)),
       };
     }
     case TYPES.CMYK: {
       return {
-        c: Math.round(color.c * 100) / 100,
-        m: Math.round(color.m * 100) / 100,
-        y: Math.round(color.y * 100) / 100,
-        k: Math.round(color.k * 100) / 100,
+        c: +(color.c.toFixed(2)),
+        m: +(color.m.toFixed(2)),
+        y: +(color.y.toFixed(2)),
+        k: +(color.k.toFixed(2)),
       };
     }
     case TYPES.XYZ: {
       return {
-        x: Math.round(color.x * 1000) / 1000,
-        y: Math.round(color.y * 1000) / 1000,
-        z: Math.round(color.z * 1000) / 1000,
+        x: +(color.x.toFixed(3)),
+        y: +(color.y.toFixed(3)),
+        z: +(color.z.toFixed(3)),
       };
     }
     default:

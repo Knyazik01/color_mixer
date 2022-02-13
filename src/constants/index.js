@@ -1,3 +1,4 @@
 export { COLORS } from './colors';
-export { TYPES } from './types';
+export { MESSAGES } from './messages';
 export { REGEX } from './regex';
+export { TYPES } from './types';

@@ -1,4 +1,4 @@
-import { HEXtoRGB, RGBtoXYZ, round } from './colorConverting';
+import { CMYKtoXYZ, HEXtoRGB, RGBtoXYZ, round, XYZtoCMYK } from './colorConverting';
 import { TYPES } from '../constants';
 
 /**
@@ -9,7 +9,7 @@ import { TYPES } from '../constants';
 const mixColors = (colors) => {
   const [{ r: R, g: G, b: B }] = colors
     .reduce((rgbArr, initColor) => {
-      const [color, percent = 1 / colors.length] = Array.isArray(initColor) ? initColor : [initColor, 1 / colors.length];
+      const [color, percent = 0] = Array.isArray(initColor) ? initColor : [initColor, 0];
       const { r, g, b } = typeof color === 'string' ? HEXtoRGB(initColor) : color;
       const [{ r: prR, g: prG, b: prB }] = rgbArr;
       return [{ r: prR + r * percent, g: prG + g * percent, b: prB + b * percent }, 0];
@@ -35,7 +35,7 @@ const mixColorsMulti = (colors) => colors
 const getAverageXYZ = (colors) => {
   const [{ x: X, y: Y, z: Z }] = colors
     .reduce((xyzArr, initColor) => {
-      const [color, percent = 1 / colors.length] = Array.isArray(initColor) ? initColor : [initColor, 1 / colors.length];
+      const [color, percent = 0] = Array.isArray(initColor) ? initColor : [initColor, 0];
       const { x, y, z } = typeof color === 'string' ? RGBtoXYZ(HEXtoRGB(initColor)) : color;
       const [{ x: prX, y: prY, z: prZ }] = xyzArr;
       return [{ x: prX + x * percent, y: prY + y * percent, z: prZ + z * percent }, 0];
@@ -44,8 +44,15 @@ const getAverageXYZ = (colors) => {
   return round({ x: X, y: Y, z: Z }, TYPES.XYZ);
 };
 
+const getAverageCMYK = (colors) => {
+  const xyzColors = colors.map(({ color, percent }) => [CMYKtoXYZ(color), percent]);
+  const xyzAverage = getAverageXYZ(xyzColors);
+  return XYZtoCMYK(xyzAverage);
+};
+
 export {
   mixColors,
   mixColorsMulti,
   getAverageXYZ,
+  getAverageCMYK,
 };

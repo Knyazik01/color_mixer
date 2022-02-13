@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Slider from 'react-input-slider';
 import Button from '../Button';
-import { CMYKtoHEX, getStringsFromCMYK, randomColorCMYK, round } from '../../helpers';
+import { CMYKtoHEX, CMYKtoRGB, getStringsFromCMYK, randomColorCMYK, RGBtoCMYK, round } from '../../helpers';
 import ColorInfo from '../ColorInfo';
 import { REGEX, TYPES } from '../../constants';
 import styles from './ColorPicker.module.scss';
@@ -26,12 +26,12 @@ const ColorPicker = ({ onSelect, initColor }) => {
 
   const colorParts = ['c', 'm', 'y', 'k'];
 
-  const formattedStrings = getStringsFromCMYK(color);
+  const colorInfo = getStringsFromCMYK(color);
   return (
     <div className={styles.content}>
       <div className={styles.previewBlock}>
         <div className={styles.previewColor} style={{ backgroundColor: CMYKtoHEX(color) }} />
-        <ColorInfo info={formattedStrings} />
+        <ColorInfo info={colorInfo} />
       </div>
       <div className={styles.colorSliders}>
         {
@@ -59,7 +59,10 @@ const ColorPicker = ({ onSelect, initColor }) => {
         }
       </div>
       <Button
-        onClick={() => onSelect(color)}
+        onClick={() => {
+          const normalizeCMYK = RGBtoCMYK(CMYKtoRGB(color));
+          onSelect(normalizeCMYK);
+        }}
         className={styles.submitButton}
       >
         Select

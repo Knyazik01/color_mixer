@@ -8,10 +8,7 @@ const ColorPickerModal = ({ closeModal, onSelect, initColor }) => (
     className={styles.modal}
   >
     <ColorPicker
-      onSelect={(color) => {
-        onSelect(color);
-        closeModal();
-      }}
+      onSelect={onSelect}
       initColor={initColor}
     />
   </Modal>

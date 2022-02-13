@@ -1,24 +1,70 @@
-import { useState } from 'react';
-import ColorPickerModal from './components/ColorPickerModal';
-import './App.css';
+import { useEffect } from 'react';
+import { useSnapshot } from 'valtio';
+import state from './store/state';
+import AppInfoBlock from './components/AppInfoBlock';
+import ColorInfo from './components/ColorInfo';
+import AddedColorCard from './components/AddedColorCard';
+import { CMYKtoHEX, deleteAddedColor, getStringsFromCMYK, updateColorPercent, updateStoreColors } from './helpers';
+import AddColorButton from './components/AddColorButton';
+import styles from './App.module.scss';
+import classNames from 'classnames';
 
 const App = () => {
-  const onColorSelect = (color) => {
-    console.log(color);
-  };
-  const [isModalOpen, setIsModalOpen] = useState(true);
-  const toggleModal = (isOpen = !isModalOpen) => {
-    setIsModalOpen(isOpen);
-  };
+  const { addedColors, averageColor, isPercentValid } = useSnapshot(state);
 
+  const colorInfo = averageColor && getStringsFromCMYK(averageColor);
+  const shouldShowAddColorButton = addedColors.length < 10;
+
+  useEffect(() => {
+    const initColors = [
+      { color: { c: 1, y: 1 }, hex: CMYKtoHEX({ c: 1, y: 1 }), percent: 0.5 },
+      { color: { c: 0.3, m: 1 }, hex: CMYKtoHEX({ c: 0.3, m: 1 }), percent: 0.2 },
+      { color: { c: 1, m: 1 }, hex: CMYKtoHEX({ c: 1, m: 1 }), percent: 0.1 },
+      { color: { y: 1, k: 1 }, hex: CMYKtoHEX({ y: 1, k: 1 }), percent: 0.05 },
+      { color: { c: 1 }, hex: CMYKtoHEX({ c: 1 }), percent: 0.05 },
+      { color: { y: 1, m: 1 }, hex: CMYKtoHEX({ y: 1, m: 1 }), percent: 0.1 },
+    ];
+    updateStoreColors(initColors);
+  }, []);
   return (
-    <div className='App'>
-      {
-        isModalOpen && <ColorPickerModal
-          onSelect={onColorSelect}
-          closeModal={() => toggleModal(false)}
-        />
-      }
+    <div className={styles.app}>
+      <div className={styles.infoAndResultBlock}>
+        <AppInfoBlock />
+        {averageColor && (
+          <div className={styles.resultColorBlock}>
+            <ColorInfo info={colorInfo} />
+            <div className={styles.resultColorWrapper}>
+              <div
+                className={classNames(styles.resultColor, { [styles.invalid]: !isPercentValid })}
+                style={{ backgroundColor: CMYKtoHEX(averageColor) }}
+              />
+              {
+                !isPercentValid && (
+                  <p className={styles.error}>Сума відсотків більше 100</p>
+                )
+              }
+            </div>
+          </div>
+        )}
+      </div>
+      <div className={styles.addedColors}>
+        {
+          addedColors.map((color) => (
+              <AddedColorCard
+                key={color.hex}
+                color={color}
+                deleteColor={deleteAddedColor}
+                updateColorPercent={updateColorPercent}
+              />
+            ),
+          )
+        }
+        {
+          shouldShowAddColorButton && (
+            <AddColorButton />
+          )
+        }
+      </div>
     </div>
   );
 };
