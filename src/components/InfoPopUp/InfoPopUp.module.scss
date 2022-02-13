@@ -1,0 +1,20 @@
+@import './src/assets/styles/variables';
+@import './src/assets/styles/mixins';
+
+.popUp {
+  z-index: $popUpZ-Index;
+  position: fixed;
+  //padding: 8px 16px;
+  @include defaultWhiteBlock;
+  @include defaultShadow;
+
+  &.bottom {
+    right: 25px;
+    bottom: 8px;
+  }
+
+  &.top {
+    right: 20px;
+    top: 20px;
+  }
+}

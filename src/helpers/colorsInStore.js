@@ -1,7 +1,7 @@
 import { CMYKtoHEX } from './colorConverting';
 import state from '../store/state';
 import { updateAddedColors, updateAverage, updateIsPercentValid } from '../store/actions';
-import { MESSAGES } from '../constants';
+import { MESSAGES, STATUSES } from '../constants';
 import { getAverageCMYK } from './colorMixing';
 
 const isPercentValid = (addedColors = state.addedColors) => {
@@ -30,9 +30,15 @@ const addNewColor = (colorToAdd, percent = 0) => {
   if (!isNew) {
     const newAddedColors = [...state.addedColors, { color: colorToAdd, percent, hex }];
     updateStoreColors(newAddedColors);
-    return MESSAGES.SUCCESS;
+    return ({
+      status: STATUSES.SUCCESS,
+      message: MESSAGES.SUCCESS,
+    });
   } else {
-    return MESSAGES.ALREADY_EXIST;
+    return ({
+      status: STATUSES.FAIL,
+      message: MESSAGES.ALREADY_EXIST('color'),
+    });
   }
 };
 

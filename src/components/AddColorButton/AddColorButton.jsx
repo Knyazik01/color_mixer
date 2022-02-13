@@ -4,7 +4,8 @@ import { addNewColor } from '../../helpers';
 import Button from '../Button';
 import { ReactComponent as Paint } from '../../assets/icons/paint.svg';
 import styles from './AddColorButton.module.scss';
-import { MESSAGES } from '../../constants';
+import { STATUSES } from '../../constants';
+import PopUpMessage from '../PopUpMessage';
 
 const AddColorButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -12,12 +13,23 @@ const AddColorButton = () => {
     setIsModalOpen(isOpen);
   };
 
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [messageInfo, setMessageInfo] = useState({});
+
+  const showMessagePopUp = (message, status) => {
+    setMessageInfo({
+      status,
+      message,
+    });
+    setShowPopUp(true);
+  };
+
   const addColor = (color) => {
-    const addStatus = addNewColor(color);
-    if (addStatus === MESSAGES.SUCCESS) {
+    const { status, message } = addNewColor(color);
+    if (status === STATUSES.SUCCESS) {
       toggleModal(false);
     } else {
-      alert(addStatus);
+      showMessagePopUp(message, status);
     }
   };
   return (
@@ -34,6 +46,14 @@ const AddColorButton = () => {
           <ColorPickerModal
             onSelect={addColor}
             closeModal={() => toggleModal(false)}
+          />
+        )
+      }
+      {
+        showPopUp && (
+          <PopUpMessage
+            {...messageInfo}
+            hideMessage={() => setShowPopUp(false)}
           />
         )
       }

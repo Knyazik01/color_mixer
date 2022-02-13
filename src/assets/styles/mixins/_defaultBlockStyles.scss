@@ -1,0 +1,10 @@
+@import '../variables';
+
+@mixin defaultWhiteBlock {
+  border-radius: 16px;
+  background-color: $white;
+}
+
+@mixin defaultShadow {
+  box-shadow: 0 20px 50px $black-10;
+}
