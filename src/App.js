@@ -17,12 +17,8 @@ const App = () => {
 
   useEffect(() => {
     const initColors = [
-      { color: { c: 1, y: 1 }, hex: CMYKtoHEX({ c: 1, y: 1 }), percent: 0.5 },
-      { color: { c: 0.3, m: 1 }, hex: CMYKtoHEX({ c: 0.3, m: 1 }), percent: 0.2 },
-      { color: { c: 1, m: 1 }, hex: CMYKtoHEX({ c: 1, m: 1 }), percent: 0.1 },
-      { color: { y: 1, k: 1 }, hex: CMYKtoHEX({ y: 1, k: 1 }), percent: 0.05 },
-      { color: { c: 1 }, hex: CMYKtoHEX({ c: 1 }), percent: 0.05 },
-      { color: { y: 1, m: 1 }, hex: CMYKtoHEX({ y: 1, m: 1 }), percent: 0.1 },
+      { color: { c: 1, y: 1 }, hex: CMYKtoHEX({ c: 1, y: 1 }), percent: 0.7 },
+      { color: { y: 1, m: 1 }, hex: CMYKtoHEX({ y: 1, m: 1 }), percent: 0.3 },
     ];
     updateStoreColors(initColors);
   }, []);

@@ -15,7 +15,7 @@ const PopUpMessage = ({
     setTimeout(hideMessage, timeout);
   };
 
-  useEffect(onMount, []);
+  useEffect(onMount, [hideMessage, timeout]);
 
   return (
     <InfoPopUp position={position}>
