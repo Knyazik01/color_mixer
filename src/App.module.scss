@@ -34,7 +34,7 @@
 
     @include media(mobile) {
       flex-direction: column;
-      row-gap: 20px;
+      row-gap: 16px;
     }
 
     .resultColorBlock {
@@ -49,13 +49,17 @@
 
       @include media(mobile) {
         flex-direction: column-reverse;
-        row-gap: 24px;
+        row-gap: 20px;
       }
 
       .resultColorWrapper {
         width: 200px;
         height: 200px;
         flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 10px;
 
         .resultColor {
           width: 100%;
@@ -64,7 +68,6 @@
           @include resultColorShadow;
 
           &.invalid {
-            margin: 20px 20px 10px;
             border: 2px solid white;
             outline: 5px solid red;
             width: 170px;
