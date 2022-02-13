@@ -65,7 +65,7 @@ const ColorPicker = ({ onSelect, initColor }) => {
         }}
         className={styles.submitButton}
       >
-        Select
+        Обрати
       </Button>
     </div>
   );

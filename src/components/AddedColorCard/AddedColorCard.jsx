@@ -55,7 +55,7 @@ const AddedColorCard = ({ color, deleteColor, updateColorPercent }) => {
           }}
           className={styles.changeButton}
         >
-          Change
+          Змінити
         </Button>
       </div>
     </div>
