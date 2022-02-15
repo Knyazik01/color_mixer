@@ -36,7 +36,7 @@ const App = () => {
               />
               {
                 !isPercentValid && (
-                  <p className={styles.error}>Сума відсотків більше 100</p>
+                  <p className={styles.error}>Сума відсотків не рівна 100</p>
                 )
               }
             </div>
@@ -46,13 +46,13 @@ const App = () => {
       <div className={styles.addedColors}>
         {
           addedColors.map((color) => (
-              <AddedColorCard
-                key={color.hex}
-                color={color}
-                deleteColor={deleteAddedColor}
-                updateColorPercent={updateColorPercent}
-              />
-            ),
+            <AddedColorCard
+              key={color.hex}
+              color={color}
+              deleteColor={deleteAddedColor}
+              updateColorPercent={updateColorPercent}
+            />
+          ),
           )
         }
         {

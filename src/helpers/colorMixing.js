@@ -38,7 +38,11 @@ const getAverageXYZ = (colors) => {
       const [color, percent = 0] = Array.isArray(initColor) ? initColor : [initColor, 0];
       const { x, y, z } = typeof color === 'string' ? RGBtoXYZ(HEXtoRGB(initColor)) : color;
       const [{ x: prX, y: prY, z: prZ }] = xyzArr;
-      return [{ x: prX + x * percent, y: prY + y * percent, z: prZ + z * percent }, 0];
+      return [{
+        x: prX + x * percent,
+        y: prY + y * percent,
+        z: prZ + z * percent,
+      }, 0];
     }, [{ x: 0, y: 0, z: 0 }, 0]);
 
   return round({ x: X, y: Y, z: Z }, TYPES.XYZ);
