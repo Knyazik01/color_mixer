@@ -19,6 +19,10 @@ const AddedColorCard = ({ color, deleteColor, updateColorPercent }) => {
     isValid && setPercent(value);
   };
 
+  const updateColor = () => {
+    updateColorPercent(hex, percent / 100);
+  };
+
   return (
     <div className={styles.content} style={{ backgroundColor: hex }}>
       <Button
@@ -47,12 +51,11 @@ const AddedColorCard = ({ color, deleteColor, updateColorPercent }) => {
             value={percent}
             className={styles.input}
             onChange={onInputChange}
+            onBlur={updateColor}
           />
         </label>
         <Button
-          onClick={() => {
-            updateColorPercent(hex, percent / 100);
-          }}
+          onClick={updateColor}
           className={styles.changeButton}
         >
           Змінити
