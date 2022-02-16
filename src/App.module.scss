@@ -1,5 +1,5 @@
-@import './src/assets/styles/variables';
-@import './src/assets/styles/mixins';
+@import "./src/assets/styles/variables";
+@import "./src/assets/styles/mixins";
 
 .app {
   padding: 80px;
@@ -75,7 +75,7 @@
 
             &:after {
               position: absolute;
-              content: '';
+              content: "";
               top: -8px;
               bottom: -8px;
               left: -8px;
@@ -88,6 +88,7 @@
 
         .error {
           color: $brown;
+          width: max-content;
         }
       }
     }
